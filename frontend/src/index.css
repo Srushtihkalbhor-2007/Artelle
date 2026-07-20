@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom font — used ONLY for the Home page hero heading ("ART THAT TELLS A STORY").
+   Not added to the Tailwind font family list on purpose, so it can't accidentally
+   get reused elsewhere in the site. */
+@font-face {
+  font-family: 'HeroHeadingFont';
+  src: url('/fonts/Myfontweb-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-ink font-body antialiased;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(47, 42, 40, 0.035) 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-heading;
+  }
+
+  /* Respect reduced-motion preferences across the whole site */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Soft paper card used throughout the site — About journal, modal, contact card */
+  .paper-card {
+    @apply bg-paper border border-border rounded-paper shadow-card;
+  }
+
+  /* Little washi-tape strip, used to pin notes to the paper in the About page */
+  .tape {
+    @apply absolute bg-blush/80 opacity-90;
+    width: 80px;
+    height: 26px;
+    top: -14px;
+    transform: rotate(-4deg);
+    box-shadow: 0 2px 6px rgba(47, 42, 40, 0.08);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3
+      font-body font-semibold text-paper shadow-soft transition-all duration-300
+      hover:-translate-y-0.5 hover:shadow-lift active:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-accent
+      bg-transparent px-7 py-3 font-body font-semibold text-accent transition-all duration-300
+      hover:-translate-y-0.5 hover:bg-accent hover:text-paper active:translate-y-0;
+  }
+
+  .section-eyebrow {
+    @apply font-body text-xs tracking-[0.35em] uppercase text-accent;
+  }
+}
+
+/* Custom scrollbar tuned to the warm palette */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #F6F2EF;
+}
+::-webkit-scrollbar-thumb {
+  background: #E2C9C1;
+  border-radius: 10px;
+}
